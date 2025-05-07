@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animation</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header>
+    <div>
+      <a href="/Users/mastudo/Desktop/webデザ/Lesson/HTML/HTML.html">HTML編</a>
+      <a href="/Users/mastudo/Desktop/webデザ/Lesson/CSS basic/CSS basic.html">CSS基本編</a>
+      <a href="/Users/mastudo/Desktop/webデザ/Lesson/CSS Advanced/CSS advanced.html">CSS応用編</a>
+      <a href="/Users/mastudo/Desktop/webデザ/Lesson/CSS Selectors/selectors.html">Selectors編</a>
+    </div>
+    <div>
+      <a href="/Users/mastudo/Desktop/webデザ/Lesson/CSS Flexbox/flexbox.html">Flexbox編</a>
+      <a href="/Users/mastudo/Desktop/webデザ/Lesson/CSS MediaQueries/MediaQueries.html">MediaQueries編</a>
+      <p>Animation編</p>
+      <a href="/Users/mastudo/Desktop/webデザ/Lesson/CSS Nesting/Nesting.html">Nesting編</a>
+      <a href="/Users/mastudo/Desktop/webデザ/Lesson/CSS Grid/inndex.html">Grid編</a>
+    </div>
+  </header>
+  <a href="/Users/mastudo/Desktop/webデザ/Lesson/index.html" class="a-lesson">←Lesson</a>
+  <a class="a-top" href="#">↑TOP</a>
+  <main>
+    <section>
+      <p>目次</p>
+      <small class="mokuji"><a href="#1">シンプルなアニメーション</a>
+        <a href="#2">複雑なアニメーション</a>
+        <a href="#3">実用的なアニメーション</a></small>
+    </section>
+    <nav>
+      <h1 id="1">シンプルなアニメーション</h1>
+      <section>
+        <h2><code>transition-property:</code> / <code>transition-duration:</code></h2>
+        <p>
+          要素に動きを持たせる際に指定するプロパティ。<br><code>transition-property</code>でどの値に対して変化をもたらすか、<br><code>transition-duration</code>で変化までにどれだけの時間をかけるかを指定する。<br>例)boxプロパティがマウスホバーした際に、1秒かけて丸くなるようにしたい場合、
+        </p>
+        <div class="move">
+          <p>
+            ①擬似クラスを用いてホバー時に丸くなるように指定<br><code>.box:hover{ border-radius:50% }</code>
+          </p>
+          <p>→</p>
+          <div class="box-1"></div>
+        </div>
+        <div class="move">
+          <p>
+            ②<code>.box</code>クラスに<code>transition-property</code>/<code>transition-duration</code>を指定<br><code>.box{ transition-property:border-radius; transition-duration: 1s; }</code>
+          </p>
+          <p>→</p>
+          <div class="box-1 box-2"></div>
+        </div>
+        <div class="move">
+          <p>
+            ※<code>.box</code>ではなく<code>:hover</code>クラスに<br><code>transition-property</code>/<code>transition-duration</code>を指定した場合、<br>"マウスホバー中"にしか適用されず<br>ホバーを外した瞬間にパッと切り替わってしまう<br><code>:hover{ transition-property:border-radius; transition-duration: 1s; }</code>
+          </p>
+          <p>→</p>
+          <div class="box-1 box-3"></div>
+        </div>
+      </section>
+      <section>
+        <h2>transform / <code>translate /</code> <code>rotate /</code> <code>scale</code></h2>
+        <p>
+          <code>transiton-property</code>に指定するプロパティとして、要素を変形させる<code>transform</code>がよく使われる。<br><code>transform</code>には、移動させる<code>translate</code>、回転させる<code>rotate</code>、拡大・縮小させる<code>scale</code>などさまざまな値を指定できる。
+          <br>なお、<code>transform</code>プロパティは、インラインボックスに対しては無効となる。
+        </p>
+        <div class="move">
+          <div class="content">
+            <h4><code>translate</code></h4>
+            <p>右に40px、上に40px動かす場合<br><code>.box:hover{ transform:translate(40px, -40px); }</code><br><small>（X軸、Y軸どちらかのみを指定する場合<code>translateX() / translateY()</code>でも指定可能）
+              </small>
+            </p>
+          </div>
+          <p>→</p>
+          <div class="box box-4"></div>
+        </div>
+        <div class="move">
+          <div class="content">
+            <h4><code>rotate</code></h4>
+            <p>時計回りに45度傾ける場合<br><code>.box:hover{ transform: rotate(45deg); }</code><br><small>（反時計回りに傾けたい場合は<code>rotate(-45deg)</code>と指定する）
+              </small>
+            </p>
+          </div>
+          <p>→</p>
+          <div class="box box-5"></div>
+        </div>
+        <div class="move">
+          <div class="content">
+            <h4><code>scale</code></h4>
+            <p>X軸を2倍、Y軸を半分にする場合<br><code>.box:hover{ transform: scale(2, .5); }</code><br><small>（X軸、Y軸どちらかのみを指定する場合<code>scaleX() / scaleY()</code>でも指定でき、<br>XYを同じ比率で拡大、縮小させたい場合は<code>scale(2) / sccale(.5)</code>で可能）
+              </small>
+            </p>
+          </div>
+          <p>→</p>
+          <div class="box box-6"></div>
+        </div>
+      </section>
+      <section>
+        <h2>transform-origin</h2>
+        <p>上の<code>rotate</code>、<code>scale</code>では、デフォルトでは要素の中心が基点となるが、<code>transform-origin</code>を使うことで基点を変更できる
+        </p>
+        <div class="move">
+          <p>
+            "左上を基点に"時計回りに45度傾ける場合<br><code>.box{ transform-origin:top left; }<br>.box:hover{ transform: rotate(45deg); }</code>
+          </p>
+          <p>→</p>
+          <div class="box box-7"></div>
+        </div>
+        <div class="move">
+          <p>
+            "右下を基点に"X軸を2倍、Y軸を半分にする場合<br><code>.box{ transform-origin:bottom right; }<br>.box:hover{ transform: scale(2, .5); }</code>
+          </p>
+          <p>→</p>
+          <div class="box box-8"></div>
+        </div>
+      </section>
+      <section>
+        <h2>変形の組み合わせ</h2>
+        <p>
+          <code>transform</code>の値は半角空白で区切って値を指定することで、変形を組み合わせることができる。<br>なお、指定した値は"右から左"の順で適用される<br>例)<code>transform:translate(100px) rotate(45deg);</code>
+        </p>
+        <div class="move">
+          <p><code>transform:translate(100px) rotate(45deg);</code><br>「時計回りに45度傾いたあと、右に100px移動」する</p>
+          <p>→</p>
+          <div class="box box-9"></div>
+        </div>
+        <div class="move">
+          <p>逆に配置した場合、(<code>transform:rotate(45deg) translate(100px);</code>)<br>「右に100px移動したあと、時計回りに45度傾く」
+            <br>なお、この時”<code>trannsform-origin</code>の位置は初期値から変わらない”ため、<br>このように変形する
+          </p>
+          <p>→</p>
+          <div class="box box-10"></div>
+        </div>
+      </section>
+      <section>
+        <h2>transition-delay</h2>
+        <p>アニメーションの開始を遅らせるためのプロパティ。</p>
+        <div class="move">
+          <p><code>.box{ transition-delay:1s; }</code><br>キッカケ（今回マウスホバー）から1秒後にアニメーションが開始される<br>ホバーを離してからも同様に1秒後に戻り始める
+          </p>
+          <p>→</p>
+          <div class="box box-11"></div>
+        </div>
+        <div class="move">
+          <p><code>.box:hover{ transition-delay:1s; }</code><br><code>:hover</code>に指定した場合、ホバーを離した時にはかからずすぐに戻る</p>
+          <p>→</p>
+          <div class="box box-12"></div>
+        </div>
+        <div class="move">
+          <p>
+            1秒以下(例えば0.5秒)で指定したい場合、<code>.5s</code>と指定してもよいが、<br><code>ms</code>を用いて<code>500ms</code>としても同じ値をとる<br><code>.box{ transition-delay:.5s; }</code>＝<code>.box{ transition-delay:500ms; }</code>
+          </p>
+          <p>→</p>
+          <div class="box box-13"></div>
+        </div>
+      </section>
+      <section>
+        <h2>transition-timing-function</h2>
+        <p><code>transiton</code>プロパティの動きに対して変化をつけたい場合に使用するプロパティ</p>
+        <div class="move-2">
+          <div class="content">
+            <h4><code>transition-timing-function: ease;</code></h4>
+            <p>デフォルトの動き<br>速度がゆっくり上がって、ゆっくり落ちる</p>
+          </div>
+          <p>→</p>
+          <div class="box box-14"></div>
+        </div>
+        <div class="move-2">
+          <div class="content">
+            <h4><code>~: ease-out;</code></h4>
+            <p>動き始めがパッと弾かれたようになる。<br>小さな(軽い)UI部品で用いられる</p>
+          </div>
+          <p>→</p>
+          <div class="box box-15"></div>
+        </div>
+        <div class="move-2">
+          <div class="content">
+            <h4><code>~: ease-in-out;</code></h4>
+            <p>easeより動き始めが遅い<br>大きな(重たい)UI部品で用いられる</p>
+          </div>
+          <p>→</p>
+          <div class="box box-16"></div>
+        </div>
+        <div class="move-2">
+          <div class="content">
+            <h4><code>~: linear;</code></h4>
+            <p>初めから終わりまで等速で動く<br>ローディングアイコンなどで用いられる</p>
+          </div>
+          <p>→</p>
+          <div class="box box-17"></div>
+        </div>
+      </section>
+      <section>
+        <h2>transitionの一括指定プロパティ</h2>
+        <p>
+          <code>transition</code>関連のプロパティを指定する際、一括指定で設定することができる<br>注意点として、<code>transition-duration</code>、<code>transition-delay</code>と秒数で指定する2つのプロパティをまとめる場合、<br>最初が<code>transition-duration</code>、次が<code>transition-delay</code>の順番で指定される。<br>その順番以外は順不同でOK。
+        </p>
+        <p>例)</p>
+        <div class="move">
+          <p>
+            <code>.box{<br>
+            transition-property: transform;<br>
+            transition-duration: 2s;<br>
+            transition-timing-function: ease-out;<br>
+          }
+          </code>
+          </p>
+          <p>＝</p>
+          <p>
+            <code>.box{<br>
+            transition: transform 2s ease-out;<br>
+          }
+          </code>
+          </p>
+        </div>
+        <p>例)<code>transition-duration</code>と<code>transition-delay</code>両方ある場合</p>
+        <div class="move-3">
+          <div class="content-2">
+            <p><code>.box{<br> transition-property: transform;</code></p>
+            <div class="move-4">
+              <p><code>transition-duration:</code></p>
+              <p class="dur-2s"><code> 2s</code></p>
+              <p><code>;</code></p>
+            </div>
+            <p><code>transition-timing-function: ease-out;</code></p>
+            <div class="move-4">
+              <p><code>transition-delay:</code></p>
+              <p class="del-2s"><code> 2s</code></p>
+              <p><code>;</code></p>
+            </div>
+            <p><code>}</code></p>
+          </div>
+          <p>＝</p>
+          <div class="content-2">
+            <p><code>.box{</code></p>
+            <div class="move-4">
+              <p><code>transition: transform</code></p>
+              <p class="dur-2s"> <code> 2s</code></p>
+              <p> <code> ease-out</code></p>
+              <p class="del-2s"> <code> 2s</code></p>
+              <p><code>;</code></p>
+            </div>
+            <p><code>}</code></p>
+          </div>
+        </div>
+      </section>
+      <section>
+        <h2>transitionへの複数値の指定</h2>
+        <p>
+          「80px四方のピンク色の四角を、マウスホバーしてから1秒後に、2秒かけて右に100px動かす」場合の指定は
+        </p>
+        <div class="move-3">
+          <div class="content-2">
+            <p>
+              <code>.box{<br>
+            width: 80px;<br>
+            height: 80px;<br>
+            background: pink;<br>
+            </code>
+            </p>
+            <div class="move-4">
+              <p><code>transition: </code>
+              </p>
+              <p class="dur-2s"><code> transform</code></p>
+              <p><code>2s 1s; }</code></p>
+            </div>
+          </div>
+          <div class="content-2">
+            <p>
+              <code>.box:hover{</code>
+            </p>
+            <div class="move-4">
+              <p class="dur-2s">
+                <code>transform</code>
+              </p>
+              <p>
+                <code>: translateX(100px); <br>}</code>
+              </p>
+            </div>
+          </div>
+          <div class="box-18"></div>
+        </div>
+        <p>
+          「80px四方のピンク色の四角を、マウスホバーしてから1秒後に、<br>2秒かけて右に"丸くなりながら"100px動かす」場合<br><small>現象としては、「1秒後に2秒かけて右に100px動く」と「1秒後に2秒かけて丸くなる」が同時に起きている状態</small>
+        </p>
+
+        <div class="move-3">
+          <div class="content-2">
+            <p>
+              <code>.box{<br>
+            width: 80px;<br>
+            height: 80px;<br>
+            background: pink;<br>
+            </code>
+            </p>
+            <div class="move-4">
+              <p><code>transition: </code>
+              </p>
+              <p class="dur-2s"><code> transform</code></p>
+              <p><code>2s 1s</code></p>
+              <p>,</p>
+              <p class="del-2s"><code> border-radius</code></p>
+              <p><code>2s 1s; }</code></p>
+            </div>
+          </div>
+          <div class="content-2">
+            <p>
+              <code>.box:hover{</code>
+            </p>
+            <div class="move-4">
+              <p class="dur-2s">
+                <code>transform</code>
+              </p>
+              <p>
+                <code>: translateX(100px);</code>
+              </p>
+            </div>
+            <div class="move-4">
+              <p class="del-2s">
+                <code>border-radius</code>
+              </p>
+              <p>
+                <code>: 50%; <br>}</code>
+              </p>
+            </div>
+          </div>
+          <div class="box-19"></div>
+        </div>
+      </section>
+    </nav>
+    <nav>
+      <h1 id="2">複雑なアニメーション</h1>
+      <section>
+        <h2><code>animation-name</code> / <code>animation-duration</code> / <code>animation-iteration-count</code></h2>
+        <p><code>taransition</code>のような、キッカケが必要で単調な動きのアニメーションに対し、<code>animation</code>を使うことで、<br>より複雑なアニメーションを作ることができる。
+        </p>
+        <p><code>animation-name</code>で定義したいアニメーション名（自由に設定可能）を指定し、
+          <br>
+          <code>animation-duration</code>でアニメーションの１サイクルにどれだけ時間をかけるか、<br><code>animation-iteration-count</code>で、アニメーションを何回繰り返すか　をそれぞれ指定する。
+        </p>
+      </section>
+      <section>
+        <h2>@keyframes</h2>
+        <p>
+          <code>animation-name: move-around;</code>と指定した際、この<code>move-around</code>を定義するためには、<code>@keyframes</code>を使う。
+        </p>
+        <p>
+          アニメーションを指定したい要素とは別で<code>@keyframes move-around { }</code>という形を作り、<br>中にアニメーションの定義を指定していく。<br>この中には、アニメーションの1サイクルを100%とし、何％時点でどう変わるか、という形で指定する。
+        </p>
+
+        <div class="move-5">
+          <div class="content-2">
+            <p>
+              <code>.box{<br>
+              width: 80px;<br>
+              height: 80px;<br>
+              background: pink;<br>
+              </code>
+            </p>
+            <div class="move-4">
+              <p><code>animation-name: </code>
+              </p>
+              <p class="dur-2s"><code> move-around</code></p>
+              <p><code>; }</code></p>
+            </div>
+            <p><code>animation-duration: 4s;</code></p>
+            <p><code>animation-iteration-count: infinite;</code></p>
+          </div>
+          <div class="content-2">
+            <div class="move-4">
+              <p><code>@keyframes </code></p>
+              <p class="dur-2s">
+                <code>move-around</code>
+              </p>
+              <p>
+                <code>{</code>
+              </p>
+            </div>
+            <p>
+              <code>25%{ transform: translateX(100px); }</code>
+            </p>
+            <p>
+              <code>50%{ transform: translate(100px , 50px); }</code>
+            </p>
+            <p>
+              <code>75%{ transform: translateY(50px); }</code>
+            </p>
+            <p>
+              <code>100%{ transform: translate(0 , 0); }</code>
+            </p>
+            <p><code>}</code></p>
+          </div>
+          <div class="box-20"></div>
+        </div>
+      </section>
+      <section>
+        <h2>animation-delay</h2>
+        <p>
+          アニメーションの開始を遅らせるプロパティ。
+        </p>
+
+        <div class="move-5">
+          <div class="content-2">
+            <p>
+              <code>.box{<br>
+              width: 80px;<br>
+              height: 80px;<br>
+              background: pink;<br>
+              animation-name: move-around;<br>
+              animation-duration: 4s;<br>
+              animation-iteration-count: infinite;
+              </code>
+            </p>
+            <div class="move-4">
+              <p><code>animation-delay: </code>
+              </p>
+              <p class="dur-2s"><code> 1s</code></p>
+              <p><code>; }</code></p>
+            </div>
+          </div>
+          <div class="content-2">
+            <p>
+              <code>@keyframes move-around{</code>
+            </p>
+            <p>
+              <code>25%{ transform: translateX(100px); }</code>
+            </p>
+            <p>
+              <code>50%{ transform: translate(100px , 50px); }</code>
+            </p>
+            <p>
+              <code>75%{ transform: translateY(50px); }</code>
+            </p>
+            <p>
+              <code>100%{ transform: translate(0 , 0); }</code>
+            </p>
+            <p><code>}</code></p>
+          </div>
+          <div class="box-21"></div>
+        </div>
+      </section>
+      <section>
+        <h2>animation-direction</h2>
+        <p>
+          アニメーションのサイクルの仕方を指定するプロパティ。<br><code>animation-direction: alterate;</code>を指定すると、100%まで行った段階で逆再生し0%に戻る動きをとる
+        </p>
+
+        <div class="move-5">
+          <div class="content-2">
+            <p>
+              <code>.box{<br>
+              width: 80px;<br>
+              height: 80px;<br>
+              background: pink;<br>
+              animation-name: move-around;<br>
+              animation-duration: 4s;<br>
+              animation-iteration-count: infinite;
+              </code>
+            </p>
+            <div class="move-4">
+              <p><code>animation-direction: </code>
+              </p>
+              <p class="dur-2s"><code> alternate</code></p>
+              <p><code>; }</code></p>
+            </div>
+          </div>
+          <div class="content-2">
+            <p>
+              <code>@keyframes move-around{</code>
+            </p>
+            <p>
+              <code>25%{ transform: translateX(100px); }</code>
+            </p>
+            <p>
+              <code>50%{ transform: translate(100px , 50px); }</code>
+            </p>
+            <p>
+              <code>75%{ transform: translateY(50px); }</code>
+            </p>
+            <p>
+              <code>100%{ transform: translate(0 , 0); }</code>
+            </p>
+            <p><code>}</code></p>
+          </div>
+          <div class="box-22"></div>
+        </div>
+      </section>
+      <section>
+        <h2>animationの一括指定プロパティ</h2>
+        <p>
+          <code>animation</code>もこれまで同様、一括指定プロパティで指定することが可能。<br>
+          <code>transition</code>同様に、時間を指定する値が2つ出てきた場合は、最初が<code>duration</code>、次が<code>delay</code>の値となる。
+        </p>
+
+        <div class="move-5">
+          <div class="content-2">
+            <p>
+              <code>.box{<br>
+              width: 80px;<br>
+              height: 80px;<br>
+              background: pink;<br>
+              animation-name: move-around;<br>
+              animation-duration: 4s;<br>
+              animation-iteration-count: infinite;<br>
+              animation-delay: 1s;<br>
+              animation-direction: alternate;
+              </code>
+            </p>
+          </div>
+          <p>→</p>
+          <div class="content-2">
+            <p>
+              <code>.box{<br>
+              width: 80px;<br>
+              height: 80px;<br>
+              background: pink;<br>
+              animation: move-around 4s infinite 1s alternate;
+              </code>
+            </p>
+          </div>
+          <div class="box-23"></div>
+        </div>
+      </section>
+    </nav>
+    <nav>
+      <h1 id="3">実用的なアニメーション</h1>
+      <section>
+        <h2>buttonのスタイリング</h2>
+        <p>ボタンにのプロパティに対し、スタイリングを整え、<br>ホバーした際に色がふわっと反転するように指定する</p>
+        <section class="but-1">
+          <p><code>button{<br>
+            all: unset;<br>
+            border:2px solid black;<br>
+            font-weight: bold;<br>
+            border-radius: 4px;<br>
+            padding: 4px 8px;<br>
+            cursor:pointer;<br>
+            transition: background .3s;
+            }</code></p>
+          <p><code>button:hover{<br>
+          background:black;<br>
+          colir:white;<br>
+          }</code></p>
+          <p>→</p><button class="button-1">OK</button>
+        </section>
+        <section>
+          <h2>ローディングアイコン</h2>
+          <p>手順<br>①<code>&lt;div class&gt;</code>でclass指定した素体をHTMLで書く<br>②CSSでclassに対し基本的なスタイル付け（サイズ・ボーダー）を指定<br>
+            ③<code>ainmation</code>の一括指定プロパティで名前(spin)指定、<code>duration</code>、<code>iteration-count</code>を指定<br>④<code>@keyframes spin</code>を書き、<code>transform:rotate</code>で「100%時に360deg回転する」指定を行う
+          </p>
+          <section class="but-1">
+            <p><code>&lt;div class="loading"&gt;&lt;/div&gt;</code></p>
+            <p><code>.loading{<br>
+              width: 32px;<br>
+              height:32px;<br>
+              border-top:8px solid red;<br>
+              border-right:8px solid blue;<br>
+              border-bottom:8px solid green;<br>
+              border-left:8px solid yellow;<br>
+              border-radius: 50%;<br>
+              animation:spin 1s infinite;<br>
+              }</code></p>
+            <p><code>@keyframes spin{<br>
+            100%{<br>
+            transform:rotate(360deg);<br>
+            }</code></p>
+            <p>→</p>
+            <div class="loading"></div>
+          </section>
+          <p>
+            ⑤ここまでだと上のように<code>animation</code>のデフォルトの動きになるため、<br>ローディングアイコンらしく等速で動かすため<code>transition-timing-function</code>と同じように<br><code>animationn-timing-function</code>の<code>linear</code>を一括指定プロパティの値に入れる。
+          </p>
+          <section class="but-1">
+            <p><code>&lt;div class="loading"&gt;&lt;/div&gt;</code></p>
+            <p><code>.loading{<br>
+              width: 32px;<br>
+              height:32px;<br>
+              border-top:8px solid red;<br>
+              border-right:8px solid blue;<br>
+              border-bottom:8px solid green;<br>
+              border-left:8px solid yellow;<br>
+              border-radius: 50%;<br>
+              animation:spin 1s infinite linear;<br>
+              }</code></p>
+            <p><code>@keyframes spin{<br>
+            100%{<br>
+            transform:rotate(360deg);<br>
+            }</code></p>
+            <p>→</p>
+            <div class="loading-1"></div>
+          </section>
+        </section>
+        <section>
+          <h2>ポップアップメッセージ</h2>
+          <p>
+            手順<br>①ローディングアイコン同様に、<code>&lt;div class&gt;</code>でclass指定したメッセージの素体をHTMLで書き<br>　CSSでclassに対し基本的なスタイル付け（幅・ボーダー）を指定<br>
+            ②今回要素の場所を固定するために<code>position</code>プロパティを使用し右下に固定する<br>③<code>ainmation</code>の一括指定プロパティで名前(popup)と<code>duration</code>指定、今回<code>iteration-count</code>は初期値(1回)のため省略<br>④<code>@keyframes popup</code>を書き、<code>transform:translateX</code>で「0%・100%時には外に、20%~80%で初期値にでてくる」指定を行う
+          </p>
+          <section class="mes-1">
+            <p><code>&lt;div class="message"&gt;<br>hallo!!&lt;/div&gt;</code></p>
+            <p><code>.message{<br>
+               width: 300px;<br>
+               background:black;<br>
+               color:white;<br>
+               padding: 8px 16px;<br>
+               border-radius: 4px;<br>
+               position:absolute;<br>
+               right:32px;<br>
+               bottom: 32px;<br>
+               animation:popup 3s;<br>
+               }</code>
+            </p>
+            <p><code>@keyframes popup{<br>
+               0%{ transform:translateX(100px); }<br>
+               20%{ transform:translateX(0); }<br>
+               80%{ transform:translateX(0); }<br>
+               100%{ transform:translateX(100px); }</code>
+            </p>
+            <p>→</p>
+            <div class="message">Hallo!!</div>
+          </section>
+          <p>
+            ⑤この状態では、上記のように100%まで完了したあと初期値に戻る動きをするため、<br><code>animation-fill-mode:</code>のプロパティで完了後の状態を指定、<br><code>forwards;</code>の値で「完了後の状態をキープ」することが可能。<br>なお、このプロパティも一括指定に含めることができるため、以下のように記入。
+          </p>
+          <section class="mes-1">
+            <p><code>&lt;div class="message"&gt;<br>hallo!!&lt;/div&gt;</code></p>
+            <p><code>.message{<br>
+               width: 300px;<br>
+               background:black;<br>
+               color:white;<br>
+               padding: 8px 16px;<br>
+               border-radius: 4px;<br>
+               position:absolute;<br>
+               right:32px;<br>
+               bottom: 32px;<br>
+               animation:popup 3s forwards;<br>
+               }</code>
+            </p>
+            <p><code>@keyframes popup{<br>
+               0%{ transform:translateX(100px); }<br>
+               20%{ transform:translateX(0); }<br>
+               80%{ transform:translateX(0); }<br>
+               100%{ transform:translateX(100px); }</code>
+            </p>
+            <p>→</p>
+            <div class="message-2">Hallo!!</div>
+          </section>
+          <p>
+            ⑥さらに、不透明度を上げながらふわっと出現させたいため、<br><code>@keyframes</code>に<code>opacity</code>プロパティを使用する。<br>※<code>display:none;</code>で非表示にして再表示という発想もでるが、<br><code>display</code>プロパティは<code>transition</code>や<code>animation</code>に対応していないため使用不可。
+          </p>
+          <section class="mes-1">
+            <p><code>&lt;div class="message"&gt;<br>hallo!!&lt;/div&gt;</code></p>
+            <p><code>.message{<br>
+               width: 300px;<br>
+               background:black;<br>
+               color:white;<br>
+               padding: 8px 16px;<br>
+               border-radius: 4px;<br>
+               position:absolute;<br>
+               right:32px;<br>
+               bottom: 32px;<br>
+               animation:popup 3s forwards;<br>
+               }</code>
+            </p>
+            <p><code>@keyframes popup{<br>
+               0%{ transform:translateX(100px);<br>opacity: 0; }<br>
+               20%{ transform:translateX(0);<br>opacity: 1; }<br>
+               80%{ transform:translateX(0);<br>opacity: 1; }<br>
+               100%{ transform:translateX(100px);<br>opacity: 0; }</code>
+            </p>
+            <p>→</p>
+            <div class="message-3">Hallo!!</div>
+          </section>
+          <p>なお、ポップアップ下にボタンがある場合、ポップアップに阻害され下部のボタンが押せなくなることがある。<br>その場合は、ポップアップの要素に<code>pointer-events</code>というプロパティを<code>@keyframes</code>の100%につけ、値を<code>none</code>とすることで<br>指定した要素が100%時点でマウスイベントの対象外となり無視されるようになる。</p>
+        </section>
+      </section>
+    </nav>
+  </main>
+</body>
+
+</html>
